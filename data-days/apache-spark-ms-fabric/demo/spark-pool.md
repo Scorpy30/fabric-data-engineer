@@ -1,5 +1,3 @@
-# Configuration Example: Spark Pools in Microsoft Fabric
-
 ## 1. Spark Pool Creation Window  
 - Go to Admin Portal → Capacity settings → Data Engineering/Science Settings.
 - Screenshot: ![Spark Pool Window](./screenshots/spark-settings.png)  
@@ -69,6 +67,8 @@ What this does:
   - Add libraries from PyPI or upload custom ones.
   - Multiple runtimes supported; choose based on workload.
 
+---
+
 ## 6. Lakehouse Connection
 - Screenshot: ![Lakehouse View](./screenshots/lakehouse-view.png)  
 - Notes:
@@ -76,6 +76,7 @@ What this does:
   - Data can be queried with Spark SQL or PySpark.
   - Unified storage for structured + unstructured data.
 
+---
 
 ## 7. Starter Pool Verification
 - Screenshot: ![Starter Pool](./screenshots/starter-pool.png)  
@@ -87,3 +88,5 @@ What this does:
   - Verified with:
     - `spark.conf.get("spark.native.enabled") → true`
     - `spark.conf.get("spark.shuffle.manager") → ColumnarShuffleManager`
+
+

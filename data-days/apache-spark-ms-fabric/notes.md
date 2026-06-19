@@ -24,7 +24,7 @@
 
 ### Spark Pools
 A Spark pool consists of compute nodes that distribute data processing tasks.  
-![Spark_Pool_Architecture](./demo/screenshots/SparkPool.png)
+![Spark_Pool_Architecture](./demo/screenshots/sparkPool.png)
 
 - Head node → runs driver program, coordinates tasks.  
 - Worker nodes → executors that perform actual processing.  
@@ -88,3 +88,51 @@ Pool configuration settings include:
 
 ---
 
+## Unit 3: Run Spark Jobs
+
+### Running Spark in Fabric
+- Two main options:
+  - **Notebooks** → interactive, cell‑based, immediate results.
+  - **Spark Job Definitions** → automated, repeatable, can be scheduled.
+
+### Notebooks
+
+When you want to use Spark to explore and analyze data interactively, use a notebook.  
+- Combine text, images, and code (Python, Scala, R, SQL).
+- Organized into **cells** (markdown or executable code).
+- Results appear inline after execution.
+- Best for exploration, learning, and analysis.
+
+**Example:**
+```python
+data = [("Tarush", 1), ("Copilot", 2)]
+df = spark.createDataFrame(data, ["Name", "Value"])
+df.show()
+```
+👉 Check out [Sales Analytics Notebook](./demo/notebooks/Sales_Analytics.ipynb)  
+👉 Short notes [Click here](./demo/run-spark-code.md#-fabric-data-engineer-notebook-sales-order-exploration)
+
+### Spark Job Definitions
+
+If you want to use Spark to ingest and transform data as part of an automated process, you can define a Spark job to run a script on-demand or based on a schedule.
+
+- Define a script to run on‑demand or on a schedule.  
+- Can reference external files (e.g., Python helper libraries).  
+- Attach to a specific Lakehouse for data access.  
+- Best for production pipelines and repeatable transformations.  
+
+#### Example Setup:
+- Script: transform.py
+- References: utils.py for helper functions
+- Lakehouse: Lakehouse_1
+- Schedule: Daily at 9 AM
+
+👉 Short notes [Click here](./demo/run-spark-code.md#️-spark-job-definition-automated-etl--sales-transform)
+
+### Key Differences
+| Feature | Notebook | Spark Job Definition |
+| --- | --- | --- |
+| Purpose | Interactive exploration | Automated pipelines |
+| Execution | Manual, cell‑by‑cell | Scheduled or on‑demand |
+| Output | Inline results | Logs + Lakehouse updates |
+| Best Use Case | Learning, prototyping | Production ETL, batch jobs |
