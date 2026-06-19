@@ -104,6 +104,10 @@ For infrastructure performance profiling, detailed stage run durations, or query
 
 ![Apache Spark History Server Tracking](./screenshots/history.png)
 
+
+### 6. Schedule your Spark Job
+Click on the `Setting⚙️` icon in your Spark Job window and ![Schedule Job](./screenshots/schedule_job.png)
+
 ---
 
 ## 💻 Python Script Technical Breakdown [transform.py](./scripts/transform.py)
