@@ -24,7 +24,7 @@
 
 ### Spark Pools
 A Spark pool consists of compute nodes that distribute data processing tasks.  
-![Spark_Pool_Architecture](demo/screenshots/sparkpool.png)
+![Spark_Pool_Architecture](demo/screenshots/SparkPool.png)
 
 - Head node → runs driver program, coordinates tasks.  
 - Worker nodes → executors that perform actual processing.  
