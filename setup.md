@@ -43,3 +43,7 @@ fabric-data-engineer/
 | Lakehouse Architecture | 🔄 In progress | 🔄 In progress | |
 | Data Ingestion | ⏳ Pending | ⏳ Pending | |
 | Security & Governance | ⏳ Pending | ⏳ Pending | |
+
+
+
+gh repo create fabric-data-engineer --public --source=. --remote=origin --push
