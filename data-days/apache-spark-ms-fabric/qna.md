@@ -105,3 +105,28 @@
 
 ---
 
+## Unit 3: Run Spark Jobs – QnA
+
+### Q: What are the two main ways to run Spark in Fabric?
+  A: You can run Spark interactively in notebooks or as automated Spark job definitions.
+
+### Q: When should I use a notebook?
+  A: Use notebooks for exploration, analysis, and learning. They let you mix text, images, and code in cells, and results appear inline immediately.
+
+### Q: When should I use a Spark job definition?
+  A: Use job definitions for repeatable, automated pipelines. They run scripts on‑demand or on a schedule, and are best for production ETL tasks.
+
+### Q: Where do I put %%configure code?
+  A: In the first cell of a notebook. Job definitions don’t support notebook magics — they rely on script configuration.
+
+### Q: What’s the difference in output between notebooks and job definitions?
+  A: Notebooks show results inline (tables, charts). Job definitions produce logs and update data in the Lakehouse.
+
+### Q: Can both notebooks and job definitions access the Lakehouse?
+  A: Yes. Both can attach to a Lakehouse, query data with Spark SQL or PySpark, and write results back.
+
+### Q: Why did my first notebook cell take 2 minutes to run?
+  A: That’s the starter pool cold start. The pool spins up nodes the first time. Subsequent runs are faster because the pool stays warm.
+
+### Q: Can I schedule notebooks like job definitions?
+  A: No. Notebooks are interactive only. For scheduling, you must use a Spark job definition.
