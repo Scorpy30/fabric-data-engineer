@@ -281,4 +281,44 @@ ORDER BY Category
 
 ---
 
-## Unit 6: Visualize data in a Spark notebook
+## Unit 6: Visualize data in a Spark notebook  
+One of the most intuitive ways to analyze the results of data queries is to visualize them as charts. Notebooks in Microsoft Fabric provide some basic charting capabilities in the user interface, and when that functionality doesn't provide what you need, you can use one of the many Python graphics libraries to create and display data visualizations in the notebook.
+
+**Why Visualization Matters**
+- Raw tables are hard to interpret at scale.
+- Visualizations reveal patterns, trends, and anomalies quickly.
+- Spark notebooks support built‑in visualization tools (Fabric display options) and external libraries (Matplotlib, Seaborn).
+
+### Using built-in notebook charts
+- Use `display(df)` → shows a table by default.
+- Switch to chart view (bar, line, pie) using the notebook UI.
+- Example: visualize product counts by category.
+
+![screenshot](./demo/screenshots/notebook-chart.png)
+
+The built-in charting functionality in notebooks is useful when you want to quickly summarize the data visually. When you want to have more control over how the data is formatted, you should consider using a graphics package to create your own visualizations.
+
+### Using graphics packages in code  
+There are many graphics packages that you can use to create data visualizations in code. In particular, Python supports a large selection of packages; most of them built on the base Matplotlib library.  
+
+**Python Visualization Libraries**  
+- Matplotlib → basic plotting.
+- Seaborn → statistical plots with themes.
+- Plotly → interactive charts.
+
+👉 For a sample code check this [Notebook](./demo/notebooks/Spark_Visualize.ipynb)  
+
+**Visualizing Time Series Data**
+- Spark can handle large time‑based datasets.
+- Use line charts to show trends over time.
+- Example: sales by month.
+
+**Dashboards in Fabric**
+- Notebook visualizations can be pinned to Fabric dashboards.
+- This allows sharing insights with teams.
+- Steps:
+  - Create chart in notebook.
+  - Use “Pin to dashboard” option.
+  - Dashboard updates when notebook reruns.
+
+See the complete [demo](./demo/visualize.md)

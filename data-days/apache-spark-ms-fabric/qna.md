@@ -200,3 +200,21 @@
 ---
 
 ## Unit 6: Visualize data in a Spark notebook - QnA
+
+### Q: Why do we need visualizations in Spark notebooks?
+  A: Visualizations help interpret large datasets by revealing patterns and trends that are not obvious in raw tables.
+
+### Q: How can you visualize DataFrames directly in Fabric notebooks?
+  A: Use `display(df)` to show a table, then switch to chart view (bar, line, pie) using the notebook UI.
+
+### Q: Can Spark SQL queries be visualized?
+  A: Yes. Run queries with `spark.sql()` or `%%sql`, then use the notebook’s chart options to visualize the results.
+
+### Q: Which Python libraries are commonly used for visualization in Spark notebooks?
+  A: Matplotlib, Seaborn, and Plotly are popular choices for creating static and interactive charts.
+
+### Q: How do you visualize time series data?
+  A: Use line charts to plot values over time, often after aggregating data by date or month.
+
+### Q: How can notebook visualizations be shared in Fabric?
+  A: Pin charts to Fabric dashboards, which can be shared with teams and updated automatically when the notebook reruns.
