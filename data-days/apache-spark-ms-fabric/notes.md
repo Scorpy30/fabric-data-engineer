@@ -256,9 +256,9 @@ bikes_df = spark.sql(
      WHERE Category IN ('Mountain Bikes', 'Road Bikes')"
 )
 display(bikes_df)
-```
+```  
 
-  👉 [See demo: Query with Spark SQL API](./demo/spark-sql.md#4-query-with-spark-sql-api) 
+  👉 [See demo: Query with Spark SQL API](./demo/spark-sql.md#4-query-with-spark-sql-api)  
 
 ### Querying with `%%sql` Magic
 The previous example demonstrated how to use the Spark SQL API to embed SQL expressions in Spark code. In a notebook, you can also use the `%%sql` magic to run SQL code that queries objects in the catalog, like this:  
