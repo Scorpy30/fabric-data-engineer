@@ -158,32 +158,32 @@ We can have two cases:
 **1. With Header (Schema Inferred)**  
 - Load CSV files directly into a DataFrame.
 - Spark can **infer schema** from headers and data types.  
-  👉 See [Demo: Load CSV with Inferred Schema](./demo/dataframe.md#load-csv-with-inferred-schema)  
+  👉 See [Demo: Load CSV with Inferred Schema](./demo/spark-dataframe.md#load-csv-with-inferred-schema)  
 
 **2. Without header (explicit schema)**  
 Define schema when headers are missing or for performance.  
-  👉 See [Demo: Load CSV with Explicit Schema](./demo/dataframe.md#load-csv-with-explicit-schema)  
+  👉 See [Demo: Load CSV with Explicit Schema](./demo/spark-dataframe.md#load-csv-with-explicit-schema)  
 
 
 ### Transformations : Filtering and Grouping dataframes
 You can use the methods of the Dataframe class to filter, sort, group, and otherwise manipulate the data it contains.
 
 Select, where, filter, groupBy examples:  
-  👉 See [Demo: Transformations](./demo/dataframe.md#transformations)
+  👉 See [Demo: Transformations](./demo/spark-dataframe.md#transformations)
 
 
 ### Saving Data  
 You'll often want to use Spark to transform raw data and save the results for further analysis or downstream processing. The following code example saves the dataFrame into a parquet file in the data lake, replacing any existing file of the same name.  
-  👉 See [Demo: Saving Data](./demo/dataframe.md#saving-data)
+  👉 See [Demo: Saving Data](./demo/spark-dataframe.md#saving-data)
 
 **Partitioning the Output File**  
 Partitioning is an optimization technique that enables Spark to maximize performance across the worker nodes. More performance gains can be achieved when filtering data in queries by eliminating unnecessary disk IO.  
-  👉 See [Demo: Partioning Output File](./demo//dataframe.md#partition-output-for-performance)
+  👉 See [Demo: Partioning Output File](./demo/spark-dataframe.md#partition-output-for-performance)
 
 ### Load Partitioned Data
   - Load only specific partitions.  
 When reading partitioned data into a dataframe, you can load data from any folder within the hierarchy by specifying explicit values or wildcards for the partitioned fields. The following example loads data for products in the Road Bikes category:  
-  👉 See [Demo: Load Partitioned Data](./demo/dataframe.md#loading-partitioned-data)
+  👉 See [Demo: Load Partitioned Data](./demo/spark-dataframe.md#loading-partitioned-data)
 
 ---
 
@@ -261,3 +261,5 @@ ORDER BY Category
 ```  
 
 - Results are displayed as a table automatically.  
+
+👉 For a quick demo [click here](./demo/spark-sql.md)
