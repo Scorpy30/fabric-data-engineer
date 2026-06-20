@@ -238,6 +238,8 @@ df.write.format("delta").saveAsTable("products")
 
   👉 [See demo: Create External Table](./demo/spark-sql.md#3-create-external-table)  
 
+  **Important** : This code was not working for me. I spent one hour trying different solutions like - using the ABFS path, used CREATE TABLE, furthermore since `.createExternalTable()` method is deprecated since spark 2.2 I changed it to `.createTable()` and even then nothing changed. So focus on other methods in this unit.
+
 #### 4. Partitioning Tables
 - Same concept as partitioned Parquet files.  
 - Improves query performance by reducing unnecessary reads.  
@@ -273,3 +275,6 @@ ORDER BY Category
 - Results are displayed as a table automatically.  
 
   👉 [See demo: Query with %%sql Magic](./demo/spark-sql.md#5-query-with-sql-magic) 
+
+👉 Check out [Spark SQL Notebook](./demo/notebooks/Spark_SQL.ipynb)  
+👉 See demo steps [here](./demo/spark-sql.md)
