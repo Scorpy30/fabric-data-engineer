@@ -97,7 +97,7 @@ But if you want to capture your doubts and answers about “architecture” righ
 - **Method 1: Starting From Your Notebook (Most Common)**
     If you already have your notebook open and want to add a lakehouse to it:  
        1. Open your notebook in the Data Engineering experience.  
-       2. Look at the left side panel. 
+       2. Look at the left side panel.  
        3. You will see a section called Explorer.  
        4. Click the + Lakehouse button (it may just say Add or show a + icon).  
        5. A menu will pop up.  
