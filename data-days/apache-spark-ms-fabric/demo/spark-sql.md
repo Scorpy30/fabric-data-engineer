@@ -2,7 +2,7 @@
 
 Before beginning make sure to attach your Notebook to your Lakehouse and that the [data file](./data/products.csv) is also uploaded in your lakehouse.
 
-👉 Check out [Spark SQL Notebook](./notebooks/)  
+👉 Check out [Spark SQL Notebook](./notebooks/Spark_SQL.ipynb)  
 
 ![Notebook Setup](./screenshots/notebook-setup.png)
 
@@ -76,3 +76,4 @@ df.write.partitionBy("Category").format("delta").mode("overwrite").saveAsTable("
 ```
 
 ![screenshot](./screenshots/sql-partitioned-delta-table.png)
+
