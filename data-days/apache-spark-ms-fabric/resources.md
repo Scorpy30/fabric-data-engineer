@@ -109,3 +109,10 @@ But if you want to capture your doubts and answers about “architecture” righ
        2. At the top navigation menu, click the Open notebook dropdown.
        3. Click New notebook to start a fresh one, or Existing notebook to open one you already made.
        4. The notebook will automatically open with that lakehouse already attached and ready to go!
+
+## How to upload a file to lakehouse
+In your Lakehouse window click on `Upload A File`
+![screenshot](demo/screenshots/lakehouse-window.png)  
+
+You can even make folders as per your requirement by navigating to `Files` section
+![screenshot](demo/screenshots/upload-files.png)

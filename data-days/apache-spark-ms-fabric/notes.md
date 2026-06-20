@@ -136,3 +136,55 @@ If you want to use Spark to ingest and transform data as part of an automated pr
 | Execution | Manual, cell‑by‑cell | Scheduled or on‑demand |
 | Output | Inline results | Logs + Lakehouse updates |
 | Best Use Case | Learning, prototyping | Production ETL, batch jobs |
+
+---
+
+## Unit 4: Working with data in a Spark dataframe
+
+Natively, Spark uses a data structure called a **resilient distributed dataset (RDD)**; but while you can write code that works directly with RDDs, the most commonly used data structure for working with structured data in Spark is the dataframe, which is provided as part of the `Spark SQL` library. Dataframes in Spark are similar to those in the ubiquitous Pandas Python library, but optimized to work in Spark's distributed processing environment.
+
+**Note** : In addition to the Dataframe API, Spark SQL provides a strongly-typed Dataset API that is supported in Java and Scala. We'll focus on the Dataframe API in this module.
+
+### What is a DataFrame?  
+- Spark’s primary abstraction for structured data.
+- Similar to Pandas DataFrames, but distributed across a cluster (optimized for Spark distributed processing environment).
+- Built on top of Spark SQL.
+
+### Loading data into a dataframe
+We can have two cases:  
+- Data file has column names included [products.csv](./demo/data/products.csv)
+- Data file does not have a column name [product-data.csv](./demo/data/product-data.csv)
+
+**1. With Header (Schema Inferred)**  
+- Load CSV files directly into a DataFrame.
+- Spark can **infer schema** from headers and data types.  
+  👉 See [Demo: Load CSV with Inferred Schema](./demo/dataframe.md#load-csv-with-inferred-schema)  
+
+**2. Without header (explicit schema)**  
+Define schema when headers are missing or for performance.  
+  👉 See [Demo: Load CSV with Explicit Schema](./demo/dataframe.md#load-csv-with-explicit-schema)  
+
+
+### Transformations : Filtering and Grouping dataframes
+You can use the methods of the Dataframe class to filter, sort, group, and otherwise manipulate the data it contains.
+
+Select, where, filter, groupBy examples:  
+  👉 See [Demo: Transformations](./demo/dataframe.md#transformations)
+
+
+### Saving Data  
+You'll often want to use Spark to transform raw data and save the results for further analysis or downstream processing. The following code example saves the dataFrame into a parquet file in the data lake, replacing any existing file of the same name.  
+  👉 See [Demo: Saving Data](./demo/dataframe.md#saving-data)
+
+**Partitioning the Output File**  
+Partitioning is an optimization technique that enables Spark to maximize performance across the worker nodes. More performance gains can be achieved when filtering data in queries by eliminating unnecessary disk IO.  
+  👉 See [Demo: Partioning Output File](./demo//dataframe.md#partition-output-for-performance)
+
+### Load Partitioned Data
+  - Load only specific partitions.  
+When reading partitioned data into a dataframe, you can load data from any folder within the hierarchy by specifying explicit values or wildcards for the partitioned fields. The following example loads data for products in the Road Bikes category:  
+  👉 See [Demo: Load Partitioned Data](./demo/dataframe.md#loading-partitioned-data)
+
+---
+
+## Unit 5: Work with data using Spark SQL

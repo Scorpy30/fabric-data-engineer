@@ -105,7 +105,7 @@
 
 ---
 
-## Unit 3: Run Spark Jobs – QnA
+## Unit 3: Run Spark Code – QnA
 
 ### Q: What are the two main ways to run Spark in Fabric?
   A: You can run Spark interactively in notebooks or as automated Spark job definitions.
@@ -130,3 +130,34 @@
 
 ### Q: Can I schedule notebooks like job definitions?
   A: No. Notebooks are interactive only. For scheduling, you must use a Spark job definition.
+
+---
+
+## Unit 4: Work with Data in a Spark DataFrame – QnA
+
+### Q: What is a DataFrame in Spark?
+  A: A distributed collection of data organized into named columns, similar to Pandas but optimized for big data.
+
+### Q: How is a DataFrame different from an RDD?
+  A: RDD is the low-level resilient distributed dataset. DataFrames add schema and SQL-like operations, making them easier and faster for structured data.
+
+### Q: Why specify an explicit schema?
+  A: It ensures correct column types, avoids inference errors, and improves performance.
+
+### Q: How do I filter rows in a DataFrame?
+  A: Use `.where()` or `.filter()` methods with conditions, e.g. `df.where(df["Category"] == "Mountain Bikes")`.
+
+### Q: What format is best for saving DataFrames?
+  A: Parquet — it’s efficient, columnar, and widely supported.
+
+### Q: What is partitioning and why use it?
+  A: Partitioning splits data into folders by column values, improving query performance by reducing unnecessary reads.
+
+### Q: Can I load only one partition of data?
+  A: Yes. You can specify the partition path (e.g., `Category=Road Bikes`) when reading.
+
+===
+
+## Unit 5: Work with data using Spark SQL - QnA
+
+### 
