@@ -4,8 +4,9 @@ Before getting started with the demos make sure to connect your notebook to a la
 - [products.csv](./data/products.csv) → with header.
 - [product-data.csv](./data/product-data.csv) → without header.
 
-To connect Notebook to Lakehouse [👉 see here](../resources.md#how-to-attach-notebook-to-lakehouse-in-fabric)  
-To upload a file in Lakehouse [👉 check out](../resources.md#how-to-upload-a-file-to-lakehouse)
+**Important**
+- To connect Notebook to Lakehouse [👉 see here](../resources.md#how-to-attach-notebook-to-lakehouse-in-fabric)  
+- To upload a file in Lakehouse [👉 check out](../resources.md#how-to-upload-a-file-to-lakehouse)
 ---
 
 ## Load CSV with Inferred Schema  
