@@ -49,7 +49,7 @@ display(df.limit(10))
 
 ---
 
-Complete file 👉 [SparkDataframe](./notebooks/)
+Complete file 👉 [SparkDataframe](./notebooks/SparkDataframe.ipynb)
 
 ---
 
