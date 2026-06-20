@@ -1,6 +1,10 @@
 # Apache Spark Module (Data Days)
 
-This module covers Apache Spark basics, preparation, and running jobs in Microsoft Fabric.
+Welcome to the Apache Spark training module tailored for **Microsoft Fabric**. This repository is designed to take you from Spark fundamentals to executing complex data engineering workloads.
+
+### 🛠️ Prerequisites
+- An active Microsoft Fabric workspace (or trial capacity).
+- Basic familiarity with Python/PySpark or SQL.
 
 ---
 
