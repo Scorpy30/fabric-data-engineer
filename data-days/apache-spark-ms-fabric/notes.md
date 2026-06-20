@@ -214,6 +214,8 @@ The Dataframe API is part of a Spark library named Spark SQL, which enables data
   ```
 - This view disappears when the session ends.
 
+  👉 [See demo: Create Temp View](./demo/spark-sql.md#1-create-temporary-view)  
+
 #### 2. Creating Tables
 - Save DataFrames as tables for persistent storage.  
 - Tables are metadata structures that store their underlying data in the storage location associated with the catalog.  
@@ -226,16 +228,22 @@ df.write.format("delta").saveAsTable("products")
     - Supports transactions, versioning, and streaming. 
     - Acts like a relational database table but on big data.
 
+  👉 [See demo: Save as Delta Table](./demo/spark-sql.md#2-save-as-delta-table)  
+
 #### 3. External Tables
 - Created with `spark.catalog.createExternalTable`.  
 - Point to data in external storage (e.g., `Files/orders/`).  
 - Metadata lives in catalog, but data remains in Files.  
 - Deleting external table does not delete the data.  
 
+  👉 [See demo: Create External Table](./demo/spark-sql.md#3-create-external-table)  
+
 #### 4. Partitioning Tables
 - Same concept as partitioned Parquet files.  
 - Improves query performance by reducing unnecessary reads.  
 - Example: partitioning by Category in a Delta table.  
+
+  👉 [See demo: Partitioned Delta Table](./demo/spark-sql.md#6-partitioned-delta-table)  
 
 ### Querying with Spark SQL API  
 You can use the Spark SQL API in code written in any language to query data in the catalog. For example, the following PySpark code uses a SQL query to return data from the products table as a dataframe.
@@ -247,6 +255,8 @@ bikes_df = spark.sql(
 )
 display(bikes_df)
 ```
+
+  👉 [See demo: Query with Spark SQL API](./demo/spark-sql.md#4-query-with-spark-sql-api) 
 
 ### Querying with `%%sql` Magic
 The previous example demonstrated how to use the Spark SQL API to embed SQL expressions in Spark code. In a notebook, you can also use the `%%sql` magic to run SQL code that queries objects in the catalog, like this:  
@@ -262,4 +272,4 @@ ORDER BY Category
 
 - Results are displayed as a table automatically.  
 
-👉 For a quick demo [click here](./demo/spark-sql.md)
+  👉 [See demo: Query with %%sql Magic](./demo/spark-sql.md#5-query-with-sql-magic) 
