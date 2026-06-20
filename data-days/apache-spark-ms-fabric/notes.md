@@ -187,4 +187,77 @@ When reading partitioned data into a dataframe, you can load data from any folde
 
 ---
 
-## Unit 5: Work with data using Spark SQL
+## Unit 5: Work with Data using Spark SQL
+The Dataframe API is part of a Spark library named Spark SQL, which enables data analysts to use SQL expressions to query and manipulate data.
+
+### Spark SQL Overview
+- Spark SQL is a library in Spark that lets you query structured data using SQL syntax.  
+- It integrates seamlessly with the DataFrame API, so you can switch between code and SQL queries.  
+- Useful for data analysts who prefer SQL over Python/Scala code.  
+
+### Spark Catalog
+- The Spark catalog is a **metastore** that holds relational objects like **views** and **tables**.  
+- It enables cross‑language integration: you can write code in any Spark supported language (e.g., Python/Scala) and query the same data with SQL.  
+- Catalog objects:  
+  - **Temporary Views** → exist only for the current session.  
+  - **Managed Tables** → stored in the Lakehouse Tables area; deleting them also deletes underlying data.  
+  - **External Tables** → metadata stored in catalog, but data resides in external storage (e.g., Files folder). Deleting them doesn’t remove the data.
+
+### Creating database objects in the Spark catalog
+
+#### 1. Creating Views
+- One of the simplest ways to make data in a dataframe available for querying in the Spark catalog is to create a temporary view.  
+- Temporary views make DataFrames queryable with SQL.  
+- Example:  
+  ```python
+  df.createOrReplaceTempView("products_view")
+  ```
+- This view disappears when the session ends.
+
+#### 2. Creating Tables
+- Save DataFrames as tables for persistent storage.  
+- Tables are metadata structures that store their underlying data in the storage location associated with the catalog.  
+- Example:  
+```python
+df.write.format("delta").saveAsTable("products")
+```
+- Tables are stored in the Lakehouse **Tables** section.  
+- **Delta format** is preferred in Fabric:
+    - Supports transactions, versioning, and streaming. 
+    - Acts like a relational database table but on big data.
+
+#### 3. External Tables
+- Created with `spark.catalog.createExternalTable`.  
+- Point to data in external storage (e.g., `Files/orders/`).  
+- Metadata lives in catalog, but data remains in Files.  
+- Deleting external table does not delete the data.  
+
+#### 4. Partitioning Tables
+- Same concept as partitioned Parquet files.  
+- Improves query performance by reducing unnecessary reads.  
+- Example: partitioning by Category in a Delta table.  
+
+### Querying with Spark SQL API  
+You can use the Spark SQL API in code written in any language to query data in the catalog. For example, the following PySpark code uses a SQL query to return data from the products table as a dataframe.
+```python
+bikes_df = spark.sql(
+    "SELECT ProductID, ProductName, ListPrice \
+     FROM products \
+     WHERE Category IN ('Mountain Bikes', 'Road Bikes')"
+)
+display(bikes_df)
+```
+
+### Querying with `%%sql` Magic
+The previous example demonstrated how to use the Spark SQL API to embed SQL expressions in Spark code. In a notebook, you can also use the `%%sql` magic to run SQL code that queries objects in the catalog, like this:  
+
+Example:
+```sql
+%%sql
+SELECT Category, COUNT(ProductID) AS ProductCount
+FROM products
+GROUP BY Category
+ORDER BY Category
+```  
+
+- Results are displayed as a table automatically.  

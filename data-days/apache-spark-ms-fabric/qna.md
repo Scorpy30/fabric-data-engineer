@@ -156,8 +156,46 @@
 ### Q: Can I load only one partition of data?
   A: Yes. You can specify the partition path (e.g., `Category=Road Bikes`) when reading.
 
-===
+---
 
 ## Unit 5: Work with data using Spark SQL - QnA
 
-### 
+### Q: What is Spark SQL?
+  A: A Spark library that lets you query structured data using SQL syntax. It integrates with the DataFrame API.
+
+### Q: What is the Spark catalog?
+  A: A metastore that holds relational objects (views, tables). It enables you to query DataFrames with SQL and manage persistent tables.
+
+### Q: What is the difference between a temporary view and a table?
+  A: Temporary views exist only for the current session and disappear when it ends. Tables are persisted in the catalog and stored in the Lakehouse.
+
+### Q: What is a managed table vs an external table?
+  A: Managed tables store data in the Lakehouse Tables area; deleting them removes the data. External tables only store metadata in the catalog; data remains in external storage, so deleting them doesn’t remove the files.
+
+### Q: Why is Delta format preferred in Fabric?
+  A: Delta tables support transactions, versioning, and streaming data. They combine the reliability of relational databases with the scalability of big data.
+
+### Q: How do you query a DataFrame with SQL?
+  A: Register it as a view (`df.createOrReplaceTempView`) and then run SQL queries using `spark.sql()` or `%%sql` in notebooks.
+
+### Q: Can you partition Delta tables?
+  A: Yes. Partitioning improves performance by reducing the amount of data scanned during queries.
+
+### Q: What happens if you delete a managed table vs an external table?
+  A: Deleting a managed table removes both metadata and underlying data. Deleting an external table removes only metadata; the data files remain intact.
+
+### Q: What is delta table?
+  A: A Delta table in Spark (and Microsoft Fabric) is a special type of table built on the Delta Lake format. It’s designed to bring the reliability of relational databases into big data systems.  
+  **What Makes a Delta Table Different**  
+  1. Transactional Storage  : Delta tables support ACID transactions (Atomicity, Consistency, Isolation, Durability). This means multiple users can read/write safely without corrupting data.  
+
+  2. Versioning & Time Travel : Every change to a Delta table is logged. You can query older versions of the table to “time travel” and reproduce past results.  
+  
+  3. Schema Enforcement & Evolution : Delta tables enforce column types (so you don’t accidentally insert wrong data). They also support schema evolution — you can add new columns without breaking existing queries.  
+  
+  4. Performance Optimizations : Delta tables store data in Parquet format but add metadata layers for faster queries, indexing, and partition pruning.
+  
+  5. Streaming + Batch Together : Delta tables unify streaming and batch processing. You can continuously append data (like logs or IoT events) and still query it with SQL.
+
+---
+
