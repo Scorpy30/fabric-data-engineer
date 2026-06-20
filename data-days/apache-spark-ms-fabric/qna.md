@@ -199,3 +199,4 @@
 
 ---
 
+## Unit 6: Visualize data in a Spark notebook - QnA

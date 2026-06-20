@@ -15,6 +15,7 @@ Welcome to the Apache Spark training module tailored for **Microsoft Fabric**. T
 - [Unit 3: Run Spark Code](notes.md#unit-3-run-spark-jobs)
 - [Unit 4: Working with data in a Spark dataframe](notes.md#unit-4-working-with-data-in-a-spark-dataframe)
 - [Unit 5: Work with data using Spark SQL](notes.md#unit-5-work-with-data-using-spark-sql)
+- [Unit 6: Visualize data in a Spark notebook](notes.md#unit-6-visualize-data-in-a-spark-notebook)
 
 ---
 
@@ -25,3 +26,4 @@ Welcome to the Apache Spark training module tailored for **Microsoft Fabric**. T
 - [Unit 3 Questions](qna.md#unit3-run-spark-code--qna)
 - [Unit 4 Questions](qna.md#unit-4-work-with-data-in-a-spark-dataframe--qna)
 - [Unit 5 Questions](qna.md#unit-5-work-with-data-using-spark-sql---qna)
+- [Unit 6 Questions](qna.md#unit-6-visualize-data-in-a-spark-notebook---qna)

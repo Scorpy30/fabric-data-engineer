@@ -278,3 +278,7 @@ ORDER BY Category
 
 👉 Check out [Spark SQL Notebook](./demo/notebooks/Spark_SQL.ipynb)  
 👉 See demo steps [here](./demo/spark-sql.md)
+
+---
+
+## Unit 6: Visualize data in a Spark notebook
