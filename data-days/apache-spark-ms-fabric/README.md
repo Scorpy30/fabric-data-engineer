@@ -27,3 +27,14 @@ Welcome to the Apache Spark training module tailored for **Microsoft Fabric**. T
 - [Unit 4 Questions](qna.md#unit-4-work-with-data-in-a-spark-dataframe--qna)
 - [Unit 5 Questions](qna.md#unit-5-work-with-data-using-spark-sql---qna)
 - [Unit 6 Questions](qna.md#unit-6-visualize-data-in-a-spark-notebook---qna)
+
+---
+
+## 📚 Exercise
+
+Now it's your opportunity to work with Apache Spark in Microsoft Fabric. In this exercise, you'll use a Spark notebook to analyze and visualize data from files in lakehouse.
+
+👉 Try the practice tasks in [Unit 7 Exercise Notebook](./exercises/unit7-exercise.ipynb)
+
+>[!Note]:  
+You need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
