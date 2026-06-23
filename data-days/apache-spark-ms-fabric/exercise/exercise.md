@@ -184,6 +184,8 @@ display(customers.distinct())
 ```
 
 - Run the modified code to select only the customers who have purchased the Road-250 Red, 52 product. 
+![ss](../demo/screenshots/filter-2.png)  
+
 > [!Note] that you can **“chain”** multiple functions together so that the output of one function becomes the input for the next. In this case, the DataFrame created by the *select* method is the source DataFrame for the *where* method that is used to apply filtering criteria.
 
 
@@ -198,9 +200,9 @@ productSales = df.select("Item", "Quantity").groupBy("Item").sum()
 
 display(productSales)
 ```
-- The results show the sum of order quantities grouped by product. The *groupBy* method groups the rows by Item, and the subsequent *sum* aggregate function is applied to the remaining numeric columns - in this case, Quantity.
+- The results show the sum of order quantities grouped by product. The *groupBy* method groups the rows by `Item`, and the subsequent *sum* aggregate function is applied to the remaining numeric columns - in this case, `Quantity`.
 
-![ss]()
+![ss](../demo/screenshots/agg_group-1.png)
 
 
 2. 
@@ -220,7 +222,8 @@ display(yearlySales)
     - The *groupBy* method groups the data by the derived Year column.  
     - The *count* of rows in each group is calculated before the *orderBy* method is used to sort the resulting DataFrame.
 
-![ss]()
+![ss](../demo/screenshots/agg_group-2.png)
+
 
 ===
 
@@ -255,7 +258,7 @@ display(transformed_df.limit(5))
     - The columns are filtered and reordered, and the CustomerName column removed.
     - Review the output and verify that the transformations have been made to the data.
 
-2. You can use the Spark SQL library to transform the data by filtering rows, deriving, removing, renaming columns, and applying other data modifications.
+3. You can use the Spark SQL library to transform the data by filtering rows, deriving, removing, renaming columns, and applying other data modifications.
 
 ---
 
@@ -274,6 +277,7 @@ print ("Transformed data saved!")
 
 - In the Explorer pane on the left, in the … menu for the Files node, select Refresh. Select the transformed_data folder to verify that it contains a new folder named orders, which in turn contains one or more Parquet files.
 
+![ss](../demo/screenshots/transform-1.png)  
 
 4. 
 ```py
@@ -283,7 +287,8 @@ display(orders_df)
 
 A new DataFrame is created from the parquet files in the transformed_data/orders folder. Verify that the results show the order data that has been loaded from the parquet files.
 
-Screen picture showing Parquet files.
+Screen picture showing Parquet files.  
+![ss](../demo/screenshots/transform-2.png)
 
 ---
 
@@ -301,17 +306,19 @@ print ("Transformed data saved!")
 
 - Each month folder contains a parquet file with the orders for that month.
 
-![Screen picture showing data partitioned by Year and Month]()
+![Screen picture showing data partitioned by Year and Month](../demo/screenshots/partition-1.png)
+
+![ss](../demo/screenshots/partition-2.png)
 
 
 2. Load a new DataFrame from the `orders.parquet` file:
-```PY
+```py
 orders_2021_df = spark.read.format("parquet").load("Files/partitioned_data/Year=2021/Month=*")
 
 display(orders_2021_df)
 ```
 
-![SS]  
+![SS](../demo/screenshots/partition-3.png)
 
 Verify that the results show the order data for sales in 2021. Notice that the partitioning columns specified in the path (Year and Month) are not included in the DataFrame.
 
@@ -374,6 +381,7 @@ FROM salesorders
 GROUP BY YEAR(OrderDate)
 ORDER BY OrderYear;
 ```
+![ss](../demo/screenshots/run-sql.png)
 
 Run the cell and review the results. Observe that:
 
@@ -455,6 +463,10 @@ Run the cell and review the results, which consist of a column chart with the to
 - At the core of the matplotlib library is the pyplot object. This is the foundation for most plotting functionality.
 - The default settings result in a usable chart, but there’s considerable scope to customize it.
 
+![ss](../demo/screenshots/visual-1.png)  
+
+---
+
 Modify the code to plot the chart as follows:
 
 ```python
@@ -477,7 +489,9 @@ plt.xticks(rotation=45)
 plt.show()
 ```
 
-Re-run the code cell and view the results. The chart is now easier to understand.
+![ss](../demo/screenshots/visual-2.png)
+
+---
 
 A plot is contained with a Figure. In the previous examples, the figure was created implicitly but it can be created explicitly. Modify the code to plot the chart as follows:
 
@@ -506,6 +520,10 @@ plt.show()
 
 Re-run the code cell and view the results. The figure determines the shape and size of the plot.
 
+![ss](../demo/screenshots/visual-3.png)
+
+---
+
 A figure can contain multiple subplots, each on its own axis. Modify the code to plot the chart as follows:
 
 ```python
@@ -533,7 +551,7 @@ fig.suptitle('Sales Data')
 plt.show()
 ```
 
-Re-run the code cell and view the results.
+![ss](../demo/screenshots/visual-4.png)
 
 ---
 
@@ -559,7 +577,10 @@ ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)
 plt.show()
 ```
 
-Run the code to display a bar chart created using the seaborn library.
+A bar chart created using the seaborn library.
+![ss](../demo/screenshots/seaborn-1.png)
+
+---
 
 Modify the code as follows:
 
@@ -595,6 +616,7 @@ plt.show()
 ```
 
 Run the modified code to view the yearly revenue as a line chart.
+![ss](../demo/screenshots/seaborn-2.png)
 
 ===
 
@@ -613,3 +635,8 @@ If you’ve finished exploring your data, you can end the Spark session and dele
 4. Select **Delete** to delete the workspace.
 
 ===
+
+> [!IMPORTANT]
+
+> 👉 Find the complete [NOTEBOOK](Notebook_Exercise.ipynb) here.
+> Some practice [questions](assessment.md) here.

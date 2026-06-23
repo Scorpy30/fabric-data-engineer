@@ -34,7 +34,7 @@ Welcome to the Apache Spark training module tailored for **Microsoft Fabric**. T
 
 Now it's your opportunity to work with Apache Spark in Microsoft Fabric. In this exercise, you'll use a Spark notebook to analyze and visualize data from files in lakehouse.
 
-👉 Try the practice tasks in [Unit 7 Exercise Notebook](./exercises/unit7-exercise.ipynb)
+👉 Try the practice tasks in [Unit 7 Exercise Notebook](./exercise/exercise.md)
 
 >[!Note]:  
 You need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
