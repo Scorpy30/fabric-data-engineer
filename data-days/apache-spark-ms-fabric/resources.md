@@ -116,3 +116,7 @@ In your Lakehouse window click on `Upload A File`
 
 You can even make folders as per your requirement by navigating to `Files` section
 ![screenshot](demo/screenshots/upload-files.png)
+
+# Find the Module in here
+
+👉 [Click](https://learn.microsoft.com/en-us/training/modules/use-apache-spark-work-files-lakehouse/?ns-enrollment-type=Collection&ns-enrollment-id=j082f3tp058006)

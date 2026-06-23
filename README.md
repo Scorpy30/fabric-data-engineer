@@ -23,8 +23,8 @@ I maintain two parallel tracks:
 
 | Module | Notes | Status |
 |--------|-------|--------|
-| Apache Spark | `data-days/apache-spark-ms-fabric` | 🔄 In progress |
-| Lakehouse Architecture | `data-days/fabric-lakehouse-medallion-architecture/` | ⏳ Pending |
+| Apache Spark | `data-days/apache-spark-ms-fabric` | ✅ Completed |
+| Lakehouse Architecture | `data-days/fabric-lakehouse-medallion-architecture/` | 🔄 In Progress |
 | Data Ingestion | `data-days/data-ingestion/` | ⏳ Pending |
 | Security & Governance | `data-days/security-governance/` | ⏳ Pending |
 
