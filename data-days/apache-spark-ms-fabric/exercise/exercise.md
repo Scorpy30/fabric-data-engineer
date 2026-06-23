@@ -290,120 +290,153 @@ Screen picture showing Parquet files.
 ### 3. Save data in partitioned files
 When dealing with large volumes of data, partitioning can significantly improve performance and make it easier to filter data.
 
-Add a cell with code to save the dataframe, partitioning the data by Year and Month:
-
-code
+1. Partitioning the data by Year and Month:
+```py
 orders_df.write.partitionBy("Year","Month").mode("overwrite").parquet("Files/partitioned_data")
 
 print ("Transformed data saved!")
-Run the cell and wait for the message that the data has been saved. Then, in the Lakehouses pane on the left, in the … menu for the Files node, select Refresh and expand the partitioned_data folder to verify that it contains a hierarchy of folders named Year=xxxx, each containing folders named Month=xxxx. Each month folder contains a parquet file with the orders for that month.
+```
 
-Screen picture showing data partitioned by Year and Month.
+- In the Lakehouses pane on the left, expand the `partitioned_data` folder to verify that it contains a hierarchy of folders named `Year=xxxx`, each containing folders named `Month=xxxx`. 
 
-Add a new cell with the following code to load a new DataFrame from the orders.parquet file:
+- Each month folder contains a parquet file with the orders for that month.
 
-code
+![Screen picture showing data partitioned by Year and Month]()
+
+
+2. Load a new DataFrame from the `orders.parquet` file:
+```PY
 orders_2021_df = spark.read.format("parquet").load("Files/partitioned_data/Year=2021/Month=*")
 
 display(orders_2021_df)
-Run the cell and verify that the results show the order data for sales in 2021. Notice that the partitioning columns specified in the path (Year and Month) are not included in the DataFrame.
+```
+
+![SS]  
+
+Verify that the results show the order data for sales in 2021. Notice that the partitioning columns specified in the path (Year and Month) are not included in the DataFrame.
 
 ===
 
 ## Work with tables and SQL
-You’ve now seen how the native methods of the DataFrame object enable you to query and analyze data from a file. However, you may be more comfortable working with tables using SQL syntax. Fabric lakehouses support Delta tables, which are stored in OneLake and can be queried using Spark SQL.
 
-The Spark SQL library supports the use of SQL statements to query Delta tables in the lakehouse. This provides the flexibility of a data lake with the structured data schema and SQL-based queries of a relational data warehouse — hence the term “data lakehouse”.
+We've seen how the native methods of the DataFrame object enable us to query and analyze data from a file. However, we may be more comfortable working with tables using SQL syntax.
 
-Create a table
+Fabric lakehouses support Delta tables, which are stored in OneLake and can be queried using Spark SQL.
+
+The Spark SQL library supports the use of SQL statements to query Delta tables in the lakehouse. This provides the flexibility of a data lake with the structured data schema and SQL-based queries of a relational data warehouse — hence the term "**data lakehouse**".
+
+### 1. Create a table
+
 Delta tables in a Fabric lakehouse are relational abstractions over files stored in OneLake.
 
-Add a code cell to the notebook and enter the following code, which saves the DataFrame of sales order data as a table named salesorders:
+Add a code cell to the notebook and enter the following code, which saves the DataFrame of sales order data as a table named `salesorders`:
 
-code
- # Create a new table
- df.write.format("delta").saveAsTable("salesorders")
+```python
+# Create a new table
+df.write.format("delta").saveAsTable("salesorders")
 
- # Get the table description
- spark.sql("DESCRIBE EXTENDED salesorders").show(truncate=False)
-[!NOTE] The table is saved in Delta format, which adds relational database capabilities including support for transactions, row versioning, and other useful features. The table files are stored in the lakehouse’s Tables folder in OneLake and managed by the Fabric lakehouse.
+# Get the table description
+spark.sql("DESCRIBE EXTENDED salesorders").show(truncate=False)
+```
+
+> [!NOTE]
+> The table is saved in Delta format, which adds relational database capabilities including support for transactions, row versioning, and other useful features. The table files are stored in the lakehouse’s Tables folder in OneLake and managed by the Fabric lakehouse.
 
 Run the code cell and review the output, which describes the definition of the new table.
 
-In the Explorer pane, in the … menu for the Tables folder, select Refresh. Then expand the Tables node and verify that the salesorders table has been created.
+In the Explorer pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the `salesorders` table has been created.
 
-Screen picture showing that the salesorders table has been created.
+![ss](../demo/screenshots/salesorders-table.png)
 
-In the … menu for the salesorders table, select Load data > Spark. A new code cell is added containing code similar to the following:
+In the **...** menu for the `salesorders` table, select **Load data > Spark**. A new code cell is added containing code similar to the following:
 
-code
+```python
 df = spark.sql("SELECT * FROM [your_lakehouse].dbo.salesorders LIMIT 1000")
 
 display(df)
-Run the new code, which uses the Spark SQL library to embed a SQL query against the salesorder table in PySpark code and load the results of the query into a DataFrame.
+```
 
-Run SQL code in a cell
+Run the new code, which uses the Spark SQL library to embed a SQL query against the `salesorders` table in PySpark code and load the results of the query into a DataFrame.
+
+---
+
+### 2. Run SQL code in a cell
+
 While it’s useful to be able to embed SQL statements into a cell containing PySpark code, data analysts often just want to work directly in SQL.
 
 Add a new code cell to the notebook, and enter the following code:
 
-code
+```sql
 %%sql
 SELECT YEAR(OrderDate) AS OrderYear,
-       SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue
+       SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue
 FROM salesorders
 GROUP BY YEAR(OrderDate)
 ORDER BY OrderYear;
+```
+
 Run the cell and review the results. Observe that:
 
-The %%sql command at the beginning of the cell (called a magic) changes the language to Spark SQL instead of PySpark.
-The SQL code references the salesorders table that you created previously.
-The output from the SQL query is automatically displayed as the result under the cell.
-[!NOTE] For more information about Spark SQL and dataframes, see the Apache Spark SQL documentation.
+- The `%%sql` command at the beginning of the cell (called a magic) changes the language to Spark SQL instead of PySpark.
+- The SQL code references the `salesorders` table that you created previously.
+- The output from the SQL query is automatically displayed as the result under the cell.
 
 ===
 
 ## Visualize data with Spark
+
 Charts help you to see patterns and trends faster than would be possible by scanning thousands of rows of data. Fabric notebooks include a built-in chart view but it is not designed for complex charts. For more control over how charts are created from data in DataFrames, use Python graphics libraries like matplotlib or seaborn.
 
-View results as a chart
+### 1. View results as a chart
+
 Add a new code cell, and enter the following code:
 
-code
+```sql
 %%sql
 SELECT * FROM salesorders
-Run the code to display data from the salesorders table you created previously. In the results section beneath the cell, select + New chart.
+```
 
-Use the Build my own button at the bottom-right of the results section and set the chart settings:
+Run the code to display data from the `salesorders` table you created previously. In the results section beneath the cell, select **+ New chart**.
 
-Chart type: Bar chart
-X-axis: Item
-Y-axis: Quantity
-Series Group: –None–
-Aggregation: Sum
-Missing and NULL values: Display as 0
-Stacked: Unselected
+Use the **Build my own** button at the bottom-right of the results section and set the chart settings:
+
+| Setting | Value |
+|----------|----------|
+| Chart type | Bar chart |
+| X-axis | Item |
+| Y-axis | Quantity |
+| Series Group | –None– |
+| Aggregation | Sum |
+| Missing and NULL values | Display as 0 |
+| Stacked | Unselected |
+
 Your chart should look similar to this:
 
-Screen picture of Fabric notebook chart view.
+![ss](../demo/screenshots/chart-view.png)
 
-Get started with matplotlib
+---
+
+### 2. Get started with matplotlib
+
 Add a new code cell, and enter the following code:
 
-code
+```python
 sqlQuery = "SELECT CAST(YEAR(OrderDate) AS CHAR(4)) AS OrderYear, \
-                SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue, \
-                COUNT(DISTINCT SalesOrderNumber) AS YearlyCounts \
-            FROM salesorders \
-            GROUP BY CAST(YEAR(OrderDate) AS CHAR(4)) \
-            ORDER BY OrderYear"
+                SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue, \
+                COUNT(DISTINCT SalesOrderNumber) AS YearlyCounts \
+            FROM salesorders \
+            GROUP BY CAST(YEAR(OrderDate) AS CHAR(4)) \
+            ORDER BY OrderYear"
+
 df_spark = spark.sql(sqlQuery)
 df_spark.show()
+```
+
 Run the code. It returns a Spark DataFrame containing the yearly revenue and number of orders. To visualize the data as a chart, we’ll first use the matplotlib Python library. This library is the core plotting library on which many others are based and provides a great deal of flexibility in creating charts.
 
 Add a new code cell, and add the following code:
 
-code
+```python
 from matplotlib import pyplot as plt
 
 # matplotlib requires a Pandas dataframe, not a Spark one
@@ -414,35 +447,41 @@ plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'])
 
 # Display the plot
 plt.show()
+```
+
 Run the cell and review the results, which consist of a column chart with the total gross revenue for each year. Review the code, and notice the following:
 
-The matplotlib library requires a Pandas DataFrame, so you need to convert the Spark DataFrame returned by the Spark SQL query.
-At the core of the matplotlib library is the pyplot object. This is the foundation for most plotting functionality.
-The default settings result in a usable chart, but there’s considerable scope to customize it.
+- The matplotlib library requires a Pandas DataFrame, so you need to convert the Spark DataFrame returned by the Spark SQL query.
+- At the core of the matplotlib library is the pyplot object. This is the foundation for most plotting functionality.
+- The default settings result in a usable chart, but there’s considerable scope to customize it.
+
 Modify the code to plot the chart as follows:
 
-code
- from matplotlib import pyplot as plt
+```python
+from matplotlib import pyplot as plt
 
- # Clear the plot area
- plt.clf()
+# Clear the plot area
+plt.clf()
 
- # Create a bar plot of revenue by year
- plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
+# Create a bar plot of revenue by year
+plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
 
- # Customize the chart
- plt.title('Revenue by Year')
- plt.xlabel('Year')
- plt.ylabel('Revenue')
- plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
- plt.xticks(rotation=45)
+# Customize the chart
+plt.title('Revenue by Year')
+plt.xlabel('Year')
+plt.ylabel('Revenue')
+plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
+plt.xticks(rotation=45)
 
- # Show the figure
- plt.show()
+# Show the figure
+plt.show()
+```
+
 Re-run the code cell and view the results. The chart is now easier to understand.
+
 A plot is contained with a Figure. In the previous examples, the figure was created implicitly but it can be created explicitly. Modify the code to plot the chart as follows:
 
-code
+```python
 from matplotlib import pyplot as plt
 
 # Clear the plot area
@@ -463,10 +502,13 @@ plt.xticks(rotation=45)
 
 # Show the figure
 plt.show()
+```
+
 Re-run the code cell and view the results. The figure determines the shape and size of the plot.
+
 A figure can contain multiple subplots, each on its own axis. Modify the code to plot the chart as follows:
 
-code
+```python
 from matplotlib import pyplot as plt
 
 # Clear the plot area
@@ -489,15 +531,19 @@ fig.suptitle('Sales Data')
 
 # Show the figure
 plt.show()
-Re-run the code cell and view the results.
-[!NOTE] To learn more about plotting with matplotlib, see the matplotlib documentation.
+```
 
-Use the seaborn library
+Re-run the code cell and view the results.
+
+---
+
+### 3. Use the seaborn library
+
 While matplotlib enables you to create different chart types, it can require some complex code to achieve the best results. For this reason, new libraries have been built on matplotlib to abstract its complexity and enhance its capabilities. One such library is seaborn.
 
 Add a new code cell to the notebook, and enter the following code:
 
-code
+```python
 import seaborn as sns
 import warnings
 
@@ -511,10 +557,13 @@ warnings.filterwarnings('ignore', message='use_inf_as_na', category=FutureWarnin
 ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)
 
 plt.show()
+```
+
 Run the code to display a bar chart created using the seaborn library.
+
 Modify the code as follows:
 
-code
+```python
 import seaborn as sns
 
 # Clear the plot area
@@ -527,30 +576,40 @@ sns.set_theme(style="whitegrid")
 ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)
 
 plt.show()
+```
+
 Run the modified code and note that seaborn enables you to set a color theme for your plots.
+
 Modify the code again as follows:
 
-code
- import seaborn as sns
+```python
+import seaborn as sns
 
- # Clear the plot area
- plt.clf()
+# Clear the plot area
+plt.clf()
 
- # Create a line chart
- ax = sns.lineplot(x="OrderYear", y="GrossRevenue", data=df_sales)
+# Create a line chart
+ax = sns.lineplot(x="OrderYear", y="GrossRevenue", data=df_sales)
 
- plt.show()
+plt.show()
+```
+
 Run the modified code to view the yearly revenue as a line chart.
-[!NOTE] To learn more about plotting with seaborn, see the seaborn documentation.
 
 ===
 
 ## Clean up resources
+
 In this exercise, you’ve learned how to use Spark to work with data in Microsoft Fabric.
 
 If you’ve finished exploring your data, you can end the Spark session and delete the workspace that you created for this exercise.
 
-On the notebook menu, select Stop session to end the Spark session.
-In the bar on the left, select the icon for your workspace to view all of the items it contains.
-Select Workspace settings and in the General section, scroll down and select Remove this workspace.
-Select Delete to delete the workspace.
+1. On the notebook menu, select **Stop session** to end the Spark session.
+
+2. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+
+3. Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
+
+4. Select **Delete** to delete the workspace.
+
+===
